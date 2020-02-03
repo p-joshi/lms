@@ -71,7 +71,6 @@ export default function BasicLtiLaunchApp() {
     context_title,
     custom_canvas_course_id,
     student_custom_canvas_user_id,
-    student_lti_user_id,
   } = useContext(Config);
 
   const [ltiLaunchState, setLtiLaunchState] = useState({
@@ -111,7 +110,6 @@ export default function BasicLtiLaunchApp() {
           'context_title': context_title,
           'custom_canvas_course_id': custom_canvas_course_id,
           'student_custom_canvas_user_id': student_custom_canvas_user_id,
-          'student_lti_user_id': student_lti_user_id,
       }
       const group_ids = await apiCall({
         authToken,
