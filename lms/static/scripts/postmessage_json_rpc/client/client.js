@@ -83,6 +83,7 @@ async function call(
   try {
     return await Promise.race([response, timeoutExpired]);
   } finally {
+    // @ts-ignore - TS can't tell that `listener` is definitely initialized here.
     window_.removeEventListener('message', listener);
   }
 }

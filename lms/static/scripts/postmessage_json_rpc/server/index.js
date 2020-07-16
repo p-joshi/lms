@@ -1,6 +1,6 @@
 import Server from './server';
 
-let server = {}; // Singleton RPC server reference
+let server; // Singleton RPC server reference
 
 /**
  * Create a new RPC server and register any methods it will support.
@@ -65,7 +65,10 @@ function startRpcServer({ allowedOrigins, clientConfig }) {
  *
  * @returns {Promise<SidebarFrame>} - The `SidebarFrame`
  */
-function getSidebarWindow() {
+async function getSidebarWindow() {
+  if (!server) {
+    throw new Error('RPC server is not initialized');
+  }
   return server.sidebarWindow;
 }
 
