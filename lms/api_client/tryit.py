@@ -94,14 +94,18 @@ class ItemStream:
 
 
 if __name__ == "__main__":
-    with open("tryit.json") as fh:
-        data = json.load(fh)
+    if os.path.exists("tryit.json"):
+        with open("tryit.json") as fh:
+            data = json.load(fh)
 
-    access_token, refresh_token = data["access_token"], data["refresh_token"]
+        access_token, refresh_token = data["access_token"], data["refresh_token"]
+    else:
+        access_token, refresh_token = None, None
 
     ws = BlackboardClassicClient(
         settings=OAuth2Settings(
             client_id="e90b19eb-61c5-4a21-95ed-7afefcea273e",
+            # Is this from: https://developer.blackboard.com/portal/applications ?
             client_secret=os.environ["CLIENT_SECRET"],
             redirect_uri="https://httpbin.org/get",
         ),
@@ -115,7 +119,8 @@ if __name__ == "__main__":
 
     with ws.session():
         print("Auth URL:", ws.get_authorize_code_url())
-        # print(ws.get_tokens("mR2A233SlqueAFjrGxGQqq0N503d3JNg"))
+        # I'm guessing this was grabbed from the DB after running local courses
+        #print(ws.get_tokens(code="mR2A233SlqueAFjrGxGQqq0N503d3JNg"))
 
         # Get all results
         with timeit():
