@@ -1,7 +1,7 @@
 import { createContext } from 'preact';
 
 /**
- * Parameters for a "canned" API call that the frontend can make to the server.
+ * Parameters for an API call that the frontend can make to the server.
  *
  * The parameters of the call are decided by the backend, but the frontend
  * decides _when_ to make the call and what to show while waiting for the
@@ -9,7 +9,8 @@ import { createContext } from 'preact';
  *
  * @typedef ApiCallInfo
  * @prop {string} path
- * @prop {Object} data
+ * @prop {string} [authUrl]
+ * @prop {Object} [data]
  */
 
 /**
@@ -47,7 +48,7 @@ import { createContext } from 'preact';
  * @prop {Object} canvas
  *   @prop {boolean} canvas.enabled
  *   @prop {string} canvas.ltiLaunchUrl
- *   @prop {string} canvas.courseId
+ *   @prop {ApiCallInfo} canvas.listFiles
  * @prop {Object} google
  *   @prop {string} clientId
  *   @prop {string} developerKey
@@ -78,10 +79,8 @@ import { createContext } from 'preact';
  * @prop {Object} api
  *   @prop {string} api.authToken
  *   @prop {ApiCallInfo} api.sync
- *   @prop {string} api.viaCallbackUrl
- * @prop {string} authUrl
+ *   @prop {ApiCallInfo} api.viaUrl
  * @prop {Object} canvas
- *   @prop {string} canvas.authUrl
  *   @prop {SpeedGraderConfig} canvas.speedGrader
  * @prop {boolean} dev
  * @prop {FilePickerConfig} filePicker
